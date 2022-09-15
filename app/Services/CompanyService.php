@@ -21,6 +21,11 @@ class CompanyService
     public function store($data)
     {
         try {
+            $companies = Company::where('user_id', Auth()->user()->id)->get();
+            if($companies->count() > 2) {
+                return 'false';
+            }
+            $data['user_id'] = Auth()->user()->id;
             $company = Company::create($data);
 
             return new CompanyResource($company);
@@ -57,6 +62,14 @@ class CompanyService
         }
 
         return new CompanyResource($company);
+    }
+
+    public function userCompany()
+    {
+        $companies = Company::where('user_id', Auth()->user()->id)->get();
+        
+
+        return CompanyResource::collection($companies);
     }
 
     public function destroy($id)

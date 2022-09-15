@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\ForgotPasswordController;
 
 
 /*
@@ -37,6 +38,7 @@ Route::group(['middleware'  =>  'auth:api'], function () {
         Route::get('/v1/companies/{id}', 'find');
         Route::put('/v1/companies/{id}', 'update');
         Route::delete('/v1/companies/{id}', 'delete');
+        Route::get('/v1/user-companies', 'userCompany');
     });
 
 });
@@ -44,4 +46,8 @@ Route::group(['middleware'  =>  'auth:api'], function () {
 Route::controller(AuthController::class)->group(function () {
     Route::post('/v1/register', 'register');
     Route::post('/v1/login', 'login');
+});
+
+Route::controller(ForgotPasswordController::class)->group(function () {
+    Route::post('/v1/change-password', 'changePassword');
 });

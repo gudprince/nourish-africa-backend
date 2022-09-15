@@ -43,7 +43,7 @@ class StoreUserRequest extends FormRequest
         $errors = (new ValidationException($validator))->errors();
 
         throw new HttpResponseException(
-            $this->sendError('An Error Occured', $errors,JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            response()->json(['errors' => $errors])
         );
     }
 }

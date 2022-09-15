@@ -31,6 +31,10 @@ class CompanyController extends Controller
     public function save(StoreCompanyRequest $request)
     {
         $company = $this->companyService->store($request->all());
+        if ($company == 'false') {
+
+            return response()->json(['success' => false, "message" => "Compnies cannot be more than 3"]);
+        }
 
         return $this->sendResponse($company, 'Company Created Successfully.', 201);
     }
@@ -42,6 +46,13 @@ class CompanyController extends Controller
             return $this->sendError('Company not Found.', [], 404);
         }
         return $this->sendResponse($company, 'Company Retrieved Successfully.');
+    }
+
+    public function userCompany()
+    {
+        $companies = $this->companyService->userCompany();
+
+        return $this->sendResponse($companies, 'Company Retrieved Successfully.');
     }
 
     public function update(UpdateCompanyRequest $request, $id)

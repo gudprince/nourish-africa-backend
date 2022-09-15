@@ -33,7 +33,6 @@ class StoreCompanyRequest extends FormRequest
             'name'  => 'required|string',
             'company_email'  => 'required|email|max:255|unique:companies',
             'location'  => 'required|string|',
-            'user_id'  => "required|exists:users,id",
         ];
     }
 

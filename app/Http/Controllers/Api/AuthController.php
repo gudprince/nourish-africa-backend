@@ -29,6 +29,9 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $user = $this->authService->login($request->all());
+        if( $user == 'false') {
+           return response()->json(['success'=>false]); 
+        }
 
         return $this->sendResponse($user, 'Login Successfull.', 201);
     }

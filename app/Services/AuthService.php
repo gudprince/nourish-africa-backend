@@ -43,7 +43,8 @@ class AuthService extends Controller
 
             return $response;
         } else {
-            return $this->sendError('Unauthorised.', ['error' => 'incorrect email/password'], 401);
+            
+            return 'false';
         }
     }
 }
